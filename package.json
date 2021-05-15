@@ -9,15 +9,15 @@
   "scripts": {
     "clean": "lerna clean && lerna run clean",
     "build": "lerna run build --ignore=chanjet-eslint-report",
-    "test": "node scripts/build.js vue -f global -d && jest --runInBand",
-    "lint": "eslint . --ext .js,.ts",
+    "test": "jest --runInBand",
+    "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "format": "prettier --write \"./**/*.{ts,js,json,md}\"",
     "release": "node -r esm scripts/release.js",
     "changelog": "node -r esm ./scripts/changelog.js"
   },
   "gitHooks": {
-    "pre-commit": "mfp src --changed && mfp eslint --changed "
+    "pre-commit": ""
   },
   "devDependencies": {
     "@types/eslint": "^7.2.10",

@@ -1,0 +1,35 @@
+{
+  "name": "chanjet-codemod",
+  "version": "1.0.0",
+  "main": "dist/cli.js",
+  "license": "MIT",
+  "bin": "dist/cli.js",
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rimraf -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn run build",
+    "test": "yarn run build"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "eslint-plugin-chanjet": "^1.0.0",
+    "chalk": "^4.1.1",
+    "cli-progress": "^3.9.0",
+    "console-table-printer": "^2.9.0",
+    "eslint": "^7.26.0",
+    "eslint-plugin-unused-imports": "^1.1.1",
+    "glob": "^7.1.7",
+    "jest-worker": "26.6.2",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.5",
+    "ora": "^5.4.0",
+    "text-table": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.1",
+    "typescript": "^4.2.4",
+    "rimraf": "^3.0.2"
+  }
+}
