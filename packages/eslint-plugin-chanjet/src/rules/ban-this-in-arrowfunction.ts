@@ -38,7 +38,10 @@ export default <Rule.RuleModule>{
           )
           .join('.');
 
-        if (/ThisExpression\.(ArrowFunctionExpression\.)+Program/.test(nodePath)) {
+        if (
+          /ThisExpression\.(ArrowFunctionExpression\.)+Program/.test(nodePath) ||
+          /ThisExpression\.Program/.test(nodePath)
+        ) {
           context.report({
             node,
             message: '箭头函数中的 this is undefined',
