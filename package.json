@@ -20,7 +20,7 @@
     "pretest": "yarn build"
   },
   "gitHooks": {
-    "pre-commit": ""
+    "commit-msg": "node -r esm scripts/verifyCommit.js"
   },
   "devDependencies": {
     "@types/eslint": "^7.2.10",

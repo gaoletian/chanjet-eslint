@@ -1,15 +1,10 @@
-/* --------------------------------- Import --------------------------------- */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import execa from 'execa';
 import groupBy from 'lodash/groupBy';
 import sortBy from 'lodash/sortBy';
 import uniq from 'lodash/uniq';
 import { writeFile, readFileSync } from 'fs-extra';
-import minimist from 'minimist';
-
-/* -------------------------------- Variable -------------------------------- */
-
-const args = minimist(process.argv.slice(2));
-// const { _: cmdArgs, ...cmdOpts } = minimist(process.argv.slice(2));
+const args = require('minimist')(process.argv.slice(2));
 
 const types = {
   fix: { title: '🐛 Bug Fixes' },
@@ -28,12 +23,6 @@ const ignoreScopes = ['deps'];
 const isKnownAuthor = (name) => Boolean(knownAuthors.find((n) => name.toLowerCase().includes(n)));
 
 const allowedTypes = Object.keys(types);
-
-/* ----------------------------------- Run ---------------------------------- */
-
-main().catch(console.error);
-
-/* ------------------------------ Function Util ----------------------------- */
 
 async function main() {
   // Get last git tag
@@ -170,3 +159,5 @@ function generateMarkDown(commits) {
 
   return markdown.trim();
 }
+
+main().catch(console.error);
