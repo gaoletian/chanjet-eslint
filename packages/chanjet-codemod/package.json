@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "dist/cli.js",
   "license": "MIT",
-  "bin": "dist/cli.js",
+  "bin": {
+    "cmod": "dist/cmod.js"
+  },
   "scripts": {
     "build": "yarn run clean && yarn run compile",
+    "watch": "yarn run clean && yarn run compile --watch",
     "clean": "rimraf -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
@@ -14,6 +17,7 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
+    "chanjet-eslint-utils": "^1.0.0",
     "eslint-plugin-chanjet": "^1.0.0",
     "chalk": "^4.1.1",
     "cli-progress": "^3.9.0",

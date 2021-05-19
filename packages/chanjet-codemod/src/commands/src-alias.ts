@@ -1,35 +1,7 @@
-import { relative, dirname, resolve } from 'path';
+import { dirname, resolve } from 'path';
 import { readFile, writeFile } from 'fs-extra';
 import { threadId } from 'worker_threads';
-
-function toSrcAliasPath(rawModulePath: string, srcDirFullPath: string) {
-  return rawModulePath.replace(srcDirFullPath, 'src');
-}
-function toRelativePath(filePath: string, moduleFullPath: string) {
-  const relativePath = relative(dirname(filePath), moduleFullPath);
-  return relativePath.startsWith('..') ? relativePath : './' + relativePath;
-}
-function srcToRelativePath(filePath: string, srcAliasPath: string, srcDirFullPath: string) {
-  const moduleFullPath = srcAliasPath.replace(/src\//, srcDirFullPath + '/');
-  const relativePath = relative(dirname(filePath), moduleFullPath);
-  return relativePath.startsWith('..') ? relativePath : './' + relativePath;
-}
-
-/**
- * 返回目录绝对路径
- * 1. /root/src/modules/foo
- * 2. /root/src/(components|api|router|theme|util|........)
- * @param {string} fullpath
- */
-const getModuleDirPath = (fullpath: string) => {
-  const match = fullpath.match(/(.+?\/src)\/([a-zA-Z0-9\-_]+)\/?([a-zA-Z0-9\-_]+)?/);
-  if (!match) {
-    console.log('[getModuleDirPath] fail ', fullpath);
-    return null;
-  }
-  const [, p1, p2, p3] = match;
-  return p2 === 'modules' ? [p1, p2, p3].join('/') : [p1, p2].join('/');
-};
+import { toSrcAliasPath, toRelativePath, srcToRelativePath, getModuleDirPath } from 'chanjet-eslint-utils';
 
 /**
  * 相对路径转换为src别名路径

@@ -1,3 +1,4 @@
+// TODO cli test
 describe('cli test', () => {
   test(' " cmod eslint " ', () => {
     expect('ok').toBe('ok');

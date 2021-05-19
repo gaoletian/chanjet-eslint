@@ -23,7 +23,6 @@ const EslintConfig: ESLint.Options = {
       'chanjet-rules/prefer-alias-path': ['error', {}],
     },
   },
-  // overrideConfigFile: clidir('.eslintrc.js'),
   reportUnusedDisableDirectives: undefined,
   resolvePluginsRelativeTo: undefined,
   useEslintrc: false,
