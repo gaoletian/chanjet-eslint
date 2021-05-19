@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fix-import-type fix-import-type should work 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "/root/src/types/StoresExternal.d.ts",
+      "export type {Foo} from 'src/module/foo'
+",
+    ],
+    Array [
+      "/root/src/types/StoresExternal.d.ts",
+      "export type {default as Bar} from 'src/module/bar'
+",
+    ],
+    Array [
+      "/root/src/types/StoresExternal.d.ts",
+      "export type {default as Baz} from 'src/module/baz'
+",
+    ],
+    Array [
+      "/root/src/types/StoresExternal.d.ts",
+      "// this file is auto generate 
+export as namespace StoresExternal;
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;

@@ -1,4 +1,4 @@
-import { createESlint } from './testUtil';
+import { createESlint } from '../testUtil';
 const linter = createESlint({
   'chanjet/ban-this-in-arrowfunction': 'error',
 });

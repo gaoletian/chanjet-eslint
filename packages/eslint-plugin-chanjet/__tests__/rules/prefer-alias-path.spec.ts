@@ -1,19 +1,9 @@
-import { createESlint } from './testUtil';
+import { createESlint } from '../testUtil';
 
 describe('rule test', () => {
   const linter = createESlint({
     'chanjet/prefer-alias-path': 'error',
   });
-
-  // test('case 1', async () => {
-  //   const filePath = fixtureResolve('./fixture/prefer-appcontext-api.ts');
-  //   const code = await readfileAsync(filePath, { encoding: 'utf-8' });
-  //   const result = await linter.lintText(code, {
-  //     filePath,
-  //   });
-
-  //   expect(result).toMatchSnapshot();
-  // });
   test('chanjet/prefer-alias-path should work', async () => {
     let raw, rawFixed;
 
@@ -47,8 +37,18 @@ describe('rule test', () => {
       `import api2 from '../../api/foo.js'`,
       `import api2 from '../../api/foo.jsx'`,
       `import api2 from '../../api/foo.mjs'`,
+      `import api2 from 'src/api/index.tsx'`,
+      `import api2 from 'src/api/foo.ts'`,
+      `import api2 from 'src/api/foo.js'`,
+      `import api2 from 'src/api/foo.jsx'`,
+      `import api2 from 'src/api/foo.mjs'`,
     ].join('\n');
     rawFixed = [
+      `import api2 from 'src/api'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
       `import api2 from 'src/api'`,
       `import api2 from 'src/api/foo'`,
       `import api2 from 'src/api/foo'`,
@@ -74,18 +74,22 @@ describe('rule test', () => {
     result = await linter.lintText(raw, { filePath: '/root/src/api/foo.ts' });
     expect(result[0].output).toBe(rawFixed);
 
-    // only require or require.context presave last '/'
+    // presave last '/'
     raw = [
       `import api from '../../api/'`,
       `import('../../api/')`,
       `require('../../api/' + name)`,
+      'require(`../../api/${name}.png`)',
       `require.context('../../api/' + name)`,
+      `require.context('src/static/img/share/' + name)`,
     ].join('\n');
     rawFixed = [
-      `import api from 'src/api'`, // remove last /
-      `import('src/api')`, // remove last /
+      `import api from 'src/api/'`, // presave last /
+      `import('src/api/')`, // presave last /
       `require('src/api/' + name)`, // presave last /
+      'require(`src/api/${name}.png`)',
       `require.context('src/api/' + name)`, // presave last /
+      `require.context('src/static/img/share/' + name)`, // presave last /
     ].join('\n');
     result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
     expect(result[0].output).toBe(rawFixed);
