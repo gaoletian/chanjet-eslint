@@ -30,12 +30,9 @@ const EslintConfig: ESLint.Options = {
 
 const eslint = new ESLint(EslintConfig);
 
-async function transform(filePath: string) {
+export async function transform(filePath: string) {
   const results = await eslint.lintFiles([filePath]);
   await ESLint.outputFixes(results);
   console.log(filePath);
   return filePath;
 }
-
-module.exports = transform;
-module.exports.transform = transform;
