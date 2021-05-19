@@ -9,7 +9,9 @@
   "scripts": {
     "clean": "lerna clean && lerna run clean",
     "build": "lerna run build --ignore=chanjet-eslint-report",
+    "watch": "lerna run watch",
     "test": "jest --runInBand",
+    "cover": "jest --runInBand --coverage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "format": "prettier --write \"./**/*.{ts,js,json,md}\"",
