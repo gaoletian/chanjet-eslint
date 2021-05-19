@@ -1,6 +1,6 @@
 {
   "name": "chanjet-rules",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": "true",
   "description": "custom eslint rule and code refacotr utils for chanjet",
   "workspaces": [
@@ -16,7 +16,8 @@
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "format": "prettier --write \"./**/*.{ts,js,json,md}\"",
     "release": "node -r esm scripts/release.js",
-    "changelog": "node -r esm ./scripts/changelog.js"
+    "changelog": "node -r esm ./scripts/changelog.js",
+    "pretest": "yarn build"
   },
   "gitHooks": {
     "pre-commit": ""
