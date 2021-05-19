@@ -7,7 +7,7 @@ import {
   removeIndexAndExt,
   toRelativePath,
   toSrcAliasPath,
-} from '../pathUtil';
+} from 'chanjet-eslint-utils';
 
 const fixedCache = new Set<string>();
 
@@ -21,7 +21,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
 
     const replaceNode = useReplaceNode(context, message);
 
-    const toAliasPath = (node: TSESTree.Node, isRequireExpression = false) => {
+    const toAliasPath = (node: TSESTree.Node /* , isRequireExpression = false */) => {
       const nodeText = sourceCode.getText(node);
 
       if (fixedCache.has(nodeText)) return;
@@ -35,11 +35,9 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
 
       const RawModulePathRegexp = getAliasOrRelativeRegex();
       const nodeTextFixed = nodeText.replace(RawModulePathRegexp, (RawModulePath) => {
-        if (isRequireExpression && RawModulePath[RawModulePath.length - 2] === '/') {
-          return RawModulePath[0] + removeIndexAndExt(newModulePath) + RawModulePath.slice(-2);
-        } else {
-          return RawModulePath[0] + removeIndexAndExt(newModulePath) + RawModulePath.slice(-1);
-        }
+        // RawModulePath[0] = ['"`]
+        // RawModulePath.slice(-1) = ['"`$]
+        return RawModulePath[0] + removeIndexAndExt(newModulePath) + RawModulePath.slice(-1);
       });
       fixedCache.add(nodeTextFixed);
       replaceNode(node, nodeTextFixed);
@@ -62,7 +60,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
 
       CallExpression(node) {
         if (isRequireExpression(node) || isRequireContextExpression(node)) {
-          toAliasPath(node, true);
+          toAliasPath(node);
         }
       },
     };

@@ -1,6 +1,6 @@
 import type { RuleListener, RuleContext } from '@typescript-eslint/experimental-utils/dist/ts-eslint';
 import type { TSESTree } from '@typescript-eslint/types';
-import fs, { appendFile, readFile } from 'fs-extra';
+import { appendFile, readFile, ensureFile } from 'fs-extra';
 import { startCase } from 'lodash';
 import * as path from 'path';
 import * as astUtil from '../astUtil';
@@ -14,7 +14,7 @@ const addExportCode = async (exportCode: string, namespace: string) => {
   if (DepCache.has(exportCode)) return;
   DepCache.add(exportCode);
   const file = path.resolve(WorkDir, `src/types/${namespace}.d.ts`);
-  await fs.ensureFile(file);
+  await ensureFile(file);
   const fcontent = (await readFile(file)).toString('utf-8');
   if (fcontent.includes(exportCode)) return;
   await appendFile(file, exportCode + '\n');
