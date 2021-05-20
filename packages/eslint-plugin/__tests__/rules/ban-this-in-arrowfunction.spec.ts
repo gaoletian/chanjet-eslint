@@ -1,9 +1,9 @@
 import { createESlint } from '../testUtil';
 const linter = createESlint({
-  'chanjet/ban-this-in-arrowfunction': 'error',
+  '@chanjet/ban-this-in-arrowfunction': 'error',
 });
 
-test('chanjet/ban-this-in-arrowfunction should work', async () => {
+test('@chanjet/ban-this-in-arrowfunction should work', async () => {
   let raw, result;
   raw = `
   console.log(this.name) // this is undefined should warn 

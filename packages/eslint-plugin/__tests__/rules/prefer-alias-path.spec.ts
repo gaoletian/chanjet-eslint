@@ -2,9 +2,9 @@ import { createESlint } from '../testUtil';
 
 describe('rule test', () => {
   const linter = createESlint({
-    'chanjet/prefer-alias-path': 'error',
+    '@chanjet/prefer-alias-path': 'error',
   });
-  test('chanjet/prefer-alias-path should work', async () => {
+  test('@chanjet/prefer-alias-path should work', async () => {
     let raw, rawFixed;
 
     raw = [

@@ -39,11 +39,13 @@ describe('fix-import-type', () => {
     ].join('');
 
     const linter = createESlint({
-      'chanjet/fix-import-type': 'error',
+      '@chanjet/fix-import-type': 'error',
     });
 
     const filePath = '/root/src/stores/appStore.ts';
     let result = await linter.lintText(code, { filePath });
+
+    expect(result[0].output).not.toBeUndefined();
     expect(onlytext(result[0].output as string)).toBe(onlytext(codeFixed));
     await delay(60);
     expect(fsMock.appendFile).toBeCalled();
