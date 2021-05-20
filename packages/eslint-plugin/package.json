@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-chanjet",
+  "name": "@chanjet/eslint-plugin",
   "version": "1.1.1",
   "description": "check invalid this in arrow function",
   "keywords": [
@@ -20,7 +20,7 @@
   "dependencies": {
     "@typescript-eslint/experimental-utils": "^4.23.0",
     "@typescript-eslint/types": "^4.23.0",
-    "chanjet-eslint-utils": "^1.0.0",
+    "@chanjet/eslint-utils": "^1.0.0",
     "debug": "^4.3.1",
     "fs-extra": "^10.0.0",
     "glob": "^7.1.7",

@@ -7,7 +7,7 @@ import {
   removeIndexAndExt,
   toRelativePath,
   toSrcAliasPath,
-} from 'chanjet-eslint-utils';
+} from '../../../eslint-utils/dist';
 
 const fixedCache = new Set<string>();
 

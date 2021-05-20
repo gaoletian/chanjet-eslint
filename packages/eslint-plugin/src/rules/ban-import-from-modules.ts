@@ -1,6 +1,6 @@
 import { TSESTree } from '@typescript-eslint/types';
 import { isRequireContextExpression, isRequireExpression } from '../astUtil';
-import { getModuleFullPath } from '../../../chanjet-eslint-utils/dist';
+import { getModuleFullPath } from '../../../eslint-utils/dist';
 
 export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
   create(context) {

@@ -12,7 +12,7 @@ function getOption(rules: Linter.RulesRecord): ESLint.Options {
     fix: true,
     fixTypes: undefined,
     overrideConfig: {
-      plugins: ['eslint-plugin-chanjet'],
+      plugins: ['@chanjet/eslint-rules'],
       parser: '@typescript-eslint/parser',
       rules,
     },

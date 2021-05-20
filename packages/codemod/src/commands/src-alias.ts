@@ -1,7 +1,7 @@
 import { dirname, resolve } from 'path';
 import { readFile, writeFile } from 'fs-extra';
 import { threadId } from 'worker_threads';
-import { toSrcAliasPath, toRelativePath, srcToRelativePath, getModuleDirPath } from 'chanjet-eslint-utils';
+import { toSrcAliasPath, toRelativePath, srcToRelativePath, getModuleDirPath } from '@chanjet/eslint-utils';
 
 /**
  * 相对路径转换为src别名路径
