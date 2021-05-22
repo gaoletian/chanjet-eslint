@@ -65,5 +65,5 @@ export function getModuleFullPath(nodeCode: string, currentFile: string) {
 }
 
 export function removeIndexAndExt(str: string) {
-  return str.replace(/\.([jt]sx?|mjs)/g, '').replace('/index', '');
+  return str.replace(/(\/index)?\.([jt]sx?|mjs)$/g, '');
 }
