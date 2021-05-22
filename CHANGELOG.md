@@ -1,3 +1,28 @@
+v1.1.3 / 2021-05-22
+===================
+
+### 🐛 Bug Fixes
+
+- `eslint-utils`
+  - Fix removeIndexAndExt  regexp
+
+
+### 🏡 Chore
+
+- `general`
+  - Use yarn ci:publish publish to npm registry
+
+
+### 👓 Tests
+
+- `eslint-plugin`
+  - Prefer-alias-path should not fixed like index.scss
+
+
+### 💖 Thanks to
+
+- gaoletian
+
 v1.1.2 / 2021-05-22
 ===================
 
