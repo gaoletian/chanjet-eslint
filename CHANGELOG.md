@@ -1,3 +1,32 @@
+v1.1.2 / 2021-05-22
+===================
+
+### 💅 Refactors
+
+- `codemod`
+  - Cmod cli test case
+- `general`
+  - Rename all package with @chanjet scoped
+
+
+### 🏡 Chore
+
+- `general`
+  - VerifyCommit and changelog
+  - VerifyCommit and changelog
+
+
+### 👓 Tests
+
+- `general`
+  - Clean setup jest env
+  - Update eslint rule with @chanjet/
+
+
+### 💖 Thanks to
+
+- gaoletian
+
 v1.1.1 / 2021-05-19
 ===================
 
