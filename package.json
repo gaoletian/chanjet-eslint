@@ -16,6 +16,7 @@
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "format": "prettier --write \"./**/*.{ts,js,json,md}\"",
     "release": "node -r esm scripts/release.js",
+    "ci:publish": "node -r esm scripts/publish-to-cnpm.js",
     "changelog": "node -r esm ./scripts/changelog.js",
     "pretest": "yarn build"
   },
