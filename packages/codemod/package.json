@@ -15,8 +15,6 @@
     "test": "yarn run build"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "4.24.0",
-    "@typescript-eslint/parser": "^4.24.0",
     "@chanjet/eslint-utils": "1.1.4",
     "@chanjet/eslint-plugin": "1.1.4",
     "chalk": "^4.1.1",
@@ -35,5 +33,9 @@
     "@types/minimist": "^1.2.1",
     "typescript": "^4.2.4",
     "rimraf": "^3.0.2"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0"
   }
 }
