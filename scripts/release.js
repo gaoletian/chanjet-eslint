@@ -19,6 +19,8 @@ const packages = readdirSync(resolve(__dirname, '../packages')).filter((p) => !p
 
 const versionIncrements = ['patch', 'minor', 'major', 'prepatch', 'preminor', 'premajor', 'prerelease'];
 
+const pacageScope = '@chanjet';
+
 const inc = (i) => _inc(currentVersion, i, preId);
 const bin = (name) => resolve(__dirname, '../node_modules/.bin/' + name);
 const run = (bin, args, opts = {}) => execa(bin, args, { stdio: 'inherit', ...opts });
@@ -129,7 +131,8 @@ function updatePackage(pkgRoot, version) {
     Object.keys(pkg.dependencies).forEach((dep) => {
       let nameArr = dep.split('/');
       let pkgName = nameArr.length ? nameArr[1] : dep;
-      if (packages.includes(pkgName)) {
+      let scopeName = nameArr.length ? nameArr[0] : null;
+      if (scopeName === pacageScope && packages.includes(pkgName)) {
         pkg.dependencies[dep] = version;
       }
     });
