@@ -1,3 +1,16 @@
+v1.1.5 / 2021-05-22
+===================
+
+### 🐛 Bug Fixes
+
+- `codemod`
+  - PeerDependencies @typescript-eslint/eslint-plugin
+
+
+### 💖 Thanks to
+
+- gaoletian
+
 v1.1.4 / 2021-05-22
 ===================
 
