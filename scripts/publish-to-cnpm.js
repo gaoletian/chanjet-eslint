@@ -6,6 +6,8 @@ import execa from 'execa';
 import { prerelease } from 'semver';
 import { version as currentVersion } from '../package.json';
 
+const isCI = !!process.env.TO;
+
 /* -------------------------------- Variable -------------------------------- */
 
 const run = (bin, args, opts = {}) => execa(bin, args, { stdio: 'inherit', ...opts });
@@ -39,9 +41,15 @@ async function publish(pkgName /* releaseTag */) {
   const pkgRoot = getPkgRoot(pkgName);
   const pkg = readPkg(pkgRoot);
   if (!pkg.private) {
-    await run('npm', ['publish'], {
-      cwd: pkgRoot,
-    });
+    if (isCI) {
+      await run('npm', ['publish'], {
+        cwd: pkgRoot,
+      });
+    } else {
+      await run('cjet-publish', [], {
+        cwd: pkgRoot,
+      });
+    }
   }
 }
 

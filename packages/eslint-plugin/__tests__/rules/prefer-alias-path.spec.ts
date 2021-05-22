@@ -94,4 +94,32 @@ describe('rule test', () => {
     result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
     expect(result[0].output).toBe(rawFixed);
   });
+
+  test('should not fixed', async () => {
+    // no need fix
+    // prettier-ignore
+    const  raw = [
+      'import "index.scss"',
+      'import "./index.scss"',
+      'import "../index.scss"',
+      'import "src/index.scss"',
+      'require("index.scss")',
+      'require("./index.scss")',
+      'require("../index.scss")',
+      'require("../../index.scss")',
+    ].join('\n')
+    const rawFixed = [
+      'import "index.scss"',
+      'import "./index.scss"',
+      'import "src/modules/index.scss"',
+      'import "src/index.scss"',
+      'require("index.scss")',
+      'require("./index.scss")',
+      'require("src/modules/index.scss")',
+      'require("src/index.scss")',
+    ].join('\n');
+
+    const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
+    expect(result[0].output).toBe(rawFixed);
+  });
 });
