@@ -18,6 +18,7 @@ export function srcToRelativePath(filePath: string, srcAliasPath: string, srcDir
  * 1. /root/src/modules/foo
  * 2. /root/src/(components|api|router|theme|util|........)
  * @param {string} fullpath
+ * @returns src/api, src/stores, src/modules/foo, src/modules/bar, src/modules/api
  */
 export function getModuleDirPath(fullpath: string) {
   const match = fullpath.match(/(.+?\/src)\/([a-zA-Z0-9\-_]+)\/?([a-zA-Z0-9\-_]+)?/);
