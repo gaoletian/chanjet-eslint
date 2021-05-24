@@ -1,10 +1,10 @@
 import { createESlint } from '../testUtil';
 
-describe('rule test', () => {
+describe('prefer-alias-path rule test', () => {
   const linter = createESlint({
     '@chanjet/prefer-alias-path': 'error',
   });
-  test('@chanjet/prefer-alias-path should work', async () => {
+  test('prefer-alias-path should work', async () => {
     let raw, rawFixed;
 
     raw = [
@@ -29,37 +29,6 @@ describe('rule test', () => {
     let result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/index.ts' });
     expect(result[0].output).toBe(rawFixed);
 
-    // module path contain ext like '.js', '.ts'
-
-    raw = [
-      `import api2 from '../../api/index.tsx'`,
-      `import api2 from '../../api/foo.ts'`,
-      `import api2 from '../../api/foo.js'`,
-      `import api2 from '../../api/foo.jsx'`,
-      `import api2 from '../../api/foo.mjs'`,
-      `import api2 from 'src/api/index.tsx'`,
-      `import api2 from 'src/api/foo.ts'`,
-      `import api2 from 'src/api/foo.js'`,
-      `import api2 from 'src/api/foo.jsx'`,
-      `import api2 from 'src/api/foo.mjs'`,
-    ].join('\n');
-    rawFixed = [
-      `import api2 from 'src/api'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api/foo'`,
-      `import api2 from 'src/api/foo'`,
-    ].join('\n');
-
-    result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
-
-    expect(result[0].output).toBe(rawFixed);
-
     // prettier-ignore
     raw = [
       `import userStore from '../stores'`, 
@@ -73,9 +42,39 @@ describe('rule test', () => {
     ].join('\n');
     result = await linter.lintText(raw, { filePath: '/root/src/api/foo.ts' });
     expect(result[0].output).toBe(rawFixed);
+  });
 
-    // presave last '/'
-    raw = [
+  test('should remove /index.js,jsx,ts,tsx', async () => {
+    // module path contain ext like '.js', '.ts'
+    const raw = [
+      `import api2 from '../../api/index.tsx'`,
+      `import api2 from '../../api/foo.ts'`,
+      `import api2 from '../../api/foo.js'`,
+      `import api2 from '../../api/foo.jsx'`,
+      `import api2 from '../../api/foo.mjs'`,
+      `import api2 from 'src/api/index.tsx'`,
+      `import api2 from 'src/api/foo.ts'`,
+      `import api2 from 'src/api/foo.js'`,
+      `import api2 from 'src/api/foo.jsx'`,
+      `import api2 from 'src/api/foo.mjs'`,
+    ].join('\n');
+    const rawFixed = [
+      `import api2 from 'src/api'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+      `import api2 from 'src/api/foo'`,
+    ].join('\n');
+    const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
+    expect(result[0].output).toBe(rawFixed);
+  });
+  test('should presave last slash', async () => {
+    const raw = [
       `import api from '../../api/'`,
       `import('../../api/')`,
       `require('../../api/' + name)`,
@@ -83,7 +82,7 @@ describe('rule test', () => {
       `require.context('../../api/' + name)`,
       `require.context('src/static/img/share/' + name)`,
     ].join('\n');
-    rawFixed = [
+    const rawFixed = [
       `import api from 'src/api/'`, // presave last /
       `import('src/api/')`, // presave last /
       `require('src/api/' + name)`, // presave last /
@@ -91,7 +90,24 @@ describe('rule test', () => {
       `require.context('src/api/' + name)`, // presave last /
       `require.context('src/static/img/share/' + name)`, // presave last /
     ].join('\n');
-    result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
+    const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
+    expect(result[0].output).toBe(rawFixed);
+  });
+  test('should fixe export from', async () => {
+    // export path
+    const raw = [
+      `export {foo, bar} from '../../api/'`,
+      `export type {foo, bar} from '../../api/'`,
+      `export type {foo, bar, default as baz} from '../../api/'`,
+      `export * from '../../api/'`,
+    ].join('\n');
+    const rawFixed = [
+      `export {foo, bar} from 'src/api/'`,
+      `export type {foo, bar} from 'src/api/'`,
+      `export type {foo, bar, default as baz} from 'src/api/'`,
+      `export * from 'src/api/'`,
+    ].join('\n');
+    const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
     expect(result[0].output).toBe(rawFixed);
   });
 

@@ -63,6 +63,12 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
           toAliasPath(node);
         }
       },
+      ExportNamedDeclaration(node) {
+        toAliasPath(node);
+      },
+      ExportAllDeclaration(node) {
+        toAliasPath(node);
+      },
     };
   },
 };
