@@ -1,3 +1,22 @@
+v1.1.6 / 2021-05-24
+===================
+
+### 🚀 Features
+
+- `eslint-plugin`
+  - Prefer-alias-path also work for ExportNamedDeclaration, ExportAllDeclaration
+
+
+### 🏡 Chore
+
+- `eslint-utils`
+  - Update getModuleDirPath comment
+
+
+### 💖 Thanks to
+
+- gaoletian
+
 v1.1.5 / 2021-05-22
 ===================
 
