@@ -9,6 +9,7 @@
   ],
   "author": "gaoletian",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "watch": "yarn run clean && yarn run compile --watch",

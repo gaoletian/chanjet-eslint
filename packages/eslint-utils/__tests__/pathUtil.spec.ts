@@ -32,6 +32,7 @@ describe('pathUtil', () => {
       ['./index.scss', './index.scss'],
       ['./index.mjs', '.'],
       ['../index.mjs', '..'],
+      ['../index', '..'],
     ];
     fixture.forEach(([input, output]) => {
       expect(removeIndexAndExt(input)).toBe(output);

@@ -42,6 +42,14 @@ export function getModuleDirPath(fullpath: string) {
  */
 export const getAliasOrRelativeRegex = () => /['"`]((\.+|src)\/.+?)['"$`]/m;
 
+export function getRawModulePath(nodeCode: string) {
+  const matcher = nodeCode.match(getAliasOrRelativeRegex());
+  if (matcher === null) {
+    return '';
+  }
+  return matcher[1];
+}
+
 /**
  * 获取导入模块的绝对路径
  * @param nodeCode  # import , import(), require(), require.context()
@@ -66,5 +74,5 @@ export function getModuleFullPath(nodeCode: string, currentFile: string) {
 }
 
 export function removeIndexAndExt(str: string) {
-  return str.replace(/(\/index)?\.([jt]sx?|mjs)$/g, '');
+  return str.replace(/(\/index)?(\.([jt]sx?|mjs))?$/m, '');
 }
