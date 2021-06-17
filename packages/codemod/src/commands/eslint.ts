@@ -1,38 +1,55 @@
 import { ESLint } from 'eslint';
+import { writeDomainExpose } from '@chanjet/eslint-utils';
 
-const EslintConfig: ESLint.Options = {
-  allowInlineConfig: true,
-  cache: false,
-  errorOnUnmatchedPattern: true,
-  extensions: ['.tsx', '.ts'],
-  fix: true,
-  fixTypes: undefined,
-  ignore: true,
-  ignorePath: undefined,
-  overrideConfig: {
-    env: undefined,
-    globals: undefined,
-    ignorePatterns: undefined,
-    parser: '@typescript-eslint/parser',
-    parserOptions: {},
-    plugins: ['@chanjet/eslint-plugin', 'unused-imports', '@typescript-eslint'],
-    rules: {
+let eslint: ESLint;
+
+function createEslintConfig(rules: Record<string, string | string[]>) {
+  return {
+    allowInlineConfig: true,
+    cache: false,
+    errorOnUnmatchedPattern: true,
+    extensions: ['.tsx', '.ts'],
+    fix: true,
+    fixTypes: undefined,
+    ignore: true,
+    ignorePath: undefined,
+    overrideConfig: {
+      env: undefined,
+      globals: undefined,
+      ignorePatterns: undefined,
+      parser: '@typescript-eslint/parser',
+      parserOptions: {},
+      plugins: ['@chanjet/eslint-plugin', 'unused-imports', '@typescript-eslint'],
+      rules,
+    },
+    reportUnusedDisableDirectives: undefined,
+    resolvePluginsRelativeTo: undefined,
+    useEslintrc: false,
+  } as ESLint.Options;
+}
+
+export async function transform(filePath: string, option: Record<string, string> = {}) {
+  if (!eslint) {
+    const defaultRules = {
       'unused-imports/no-unused-imports-ts': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@chanjet/fix-import-type': 'off',
       '@chanjet/prefer-alias-path': ['error', {}],
-    },
-  },
-  reportUnusedDisableDirectives: undefined,
-  resolvePluginsRelativeTo: undefined,
-  useEslintrc: false,
-};
+      '@chanjet/prefer-appcontext': ['error', {}],
+    };
+    // 自定义rule规则
+    const rules = option.rules ? require(option.rules) : defaultRules;
 
-const eslint = new ESLint(EslintConfig);
-
-export async function transform(filePath: string) {
+    eslint = new ESLint(createEslintConfig(rules));
+  }
   const results = await eslint.lintFiles([filePath]);
-  await ESLint.outputFixes(results);
+  if (option?.fixed) {
+    await ESLint.outputFixes(results);
+  }
   console.log(filePath);
-  return filePath;
+  return results;
+}
+
+export async function finised() {
+  await writeDomainExpose();
 }

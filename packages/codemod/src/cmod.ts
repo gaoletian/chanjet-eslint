@@ -13,6 +13,7 @@ interface ICmdOption {
   changed?: boolean;
   help?: boolean;
   dry?: boolean;
+  one?: boolean;
 }
 
 const { cmd, cmdArgs, cmdOpts } = parseArgs();
@@ -81,20 +82,21 @@ async function run() {
   if (!cmdOpts.dry) {
     await workerRun(filePaths);
   }
+
   const eatTime = (new Date().getTime() - startTime) / 1000;
   spinner.succeed(green(`${CommandTitle} 用时 ${yellow(eatTime)} 秒`));
 }
 
 async function workerRun(filePaths: string[]) {
   const commandWorker = new JestWorker(CommandPath, {
-    exposedMethods: ['transform'],
-    numWorkers: 6,
+    exposedMethods: ['transform', 'finised'],
+    numWorkers: cmdOpts.one ? 1 : 3,
     enableWorkerThreads: true,
     forkOptions: {
       // @ts-ignore
       env: cmdOpts,
     },
-  }) as JestWorker & { transform: (file: string) => void };
+  }) as JestWorker & { transform: (file: string, args?: Partial<ICmdOption>) => void; finised: () => void };
 
   commandWorker.getStdout().on('data', (data) => {
     spinner.text = CommandTitle + '  ' + grey(data.toString('utf8'));
@@ -103,7 +105,11 @@ async function workerRun(filePaths: string[]) {
   commandWorker.getStderr().pipe(process.stderr);
 
   // run command
-  await Promise.all(filePaths.map((file) => commandWorker.transform(file)));
+  await Promise.all(filePaths.map((file) => commandWorker.transform(file, cmdOpts)));
+
+  // 输出代码
+  await commandWorker.finised();
+
   await commandWorker.end();
 }
 
@@ -144,6 +150,7 @@ cmod [ tosrc|eslint ] <options>
 选项：
 --changed   只处理改动的文件, 未指定选项,则处理src目录下的所有js,jsx,ts,tsx文件
 --showfile  打印文件列表
+--rules     
 例子：
 cmod tostr --changed --showfile
 `;
