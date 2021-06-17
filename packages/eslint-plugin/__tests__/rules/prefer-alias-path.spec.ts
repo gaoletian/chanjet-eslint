@@ -37,7 +37,7 @@ describe('prefer-alias-path rule test', () => {
     ].join('\n');
     rawFixed = [
       `import userStore from 'src/stores'`,
-      `import bar from './bar'`,
+      `import bar from 'src/api/bar'`,
       `import utils from '/root/utils'`,
     ].join('\n');
     result = await linter.lintText(raw, { filePath: '/root/src/api/foo.ts' });
@@ -93,7 +93,7 @@ describe('prefer-alias-path rule test', () => {
     const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
     expect(result[0].output).toBe(rawFixed);
   });
-  test('should fixe export from', async () => {
+  test('should fix export from', async () => {
     // export path
     const raw = [
       `export {foo, bar} from '../../api/'`,
@@ -126,13 +126,41 @@ describe('prefer-alias-path rule test', () => {
     ].join('\n')
     const rawFixed = [
       'import "index.scss"',
-      'import "./index.scss"',
+      'import "src/modules/foo/index.scss"',
       'import "src/modules/index.scss"',
       'import "src/index.scss"',
       'require("index.scss")',
-      'require("./index.scss")',
+      'require("src/modules/foo/index.scss")',
       'require("src/modules/index.scss")',
       'require("src/index.scss")',
+    ].join('\n');
+
+    const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
+    expect(result[0].output).toBe(rawFixed);
+  });
+  test('rule options', async () => {
+    const linter = createESlint({
+      '@chanjet/prefer-alias-path': [
+        'error',
+        { from: /src\/(api|utils)/, target: /src\/modules\//, aliasName: 'webhost' },
+      ],
+    });
+    const raw = [
+      'import React from "react"',
+      'import "src/api"',
+      'import "../../api"',
+      'import "../../utils/foo.tsx"',
+      'export {api} from "src/utils/foo.tsx"',
+      'import "../utils/foo.ts"',
+    ].join('\n');
+    const rawFixed = [
+      'import React from "react"',
+      'import "webhost/api"',
+      'import "webhost/api"',
+      'import "webhost/utils/foo"',
+      'export {api} from "webhost/utils/foo"',
+      // 不符合from规则
+      'import "../utils/foo.ts"',
     ].join('\n');
 
     const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });

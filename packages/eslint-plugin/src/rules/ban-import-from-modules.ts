@@ -1,6 +1,6 @@
 import { TSESTree } from '@typescript-eslint/types';
 import { isRequireContextExpression, isRequireExpression } from '../astUtil';
-import { getModuleFullPath } from '../../../eslint-utils/dist';
+import { getModuleFullPath } from '@chanjet/eslint-utils';
 
 export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
   create(context) {
@@ -9,7 +9,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
     const message = '禁止公共代码与业务代码耦合';
     const sourceCode = context.getSourceCode();
 
-    const report = (node: Chanjet.TSESTree.Node) => {
+    const report = (node: Chanjet.TSESTree.Node, message: string) => {
       // @ts-ignore
       context.report({ node, message });
     };
@@ -17,7 +17,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
     const check = (node: TSESTree.Node) => {
       const moduleFullPath = getModuleFullPath(sourceCode.getText(node), currentFile);
       if (options.from.test(moduleFullPath as string)) {
-        report(node);
+        report(node, [moduleFullPath, message].join(','));
       }
     };
 

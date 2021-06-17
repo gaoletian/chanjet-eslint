@@ -17,7 +17,7 @@ export function getCodePath(node: TSESTree.Node, nodePath: string[] = []): strin
  * @param context
  * @param node
  */
-export const removeNode = (context: RuleContext<string, unknown[]>, node: TSESTree.ImportDeclaration) => {
+export const removeNode = (context: RuleContext<string, unknown[]>, node: TSESTree.Node) => {
   context.report({
     node,
     // @ts-ignore

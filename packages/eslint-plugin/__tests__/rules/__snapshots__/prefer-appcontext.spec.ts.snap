@@ -1,27 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fix-import-type fix-import-type should work 1`] = `
+exports[`prefer-appcontext prefer-appcontext should work 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
-      "/root/src/types/StoresExternal.d.ts",
-      "export type {Foo} from 'src/module/foo'
+      "/root/src/AppContext/api.ts",
+      "export * from 'src/api'
 ",
     ],
     Array [
-      "/root/src/types/StoresExternal.d.ts",
-      "export type {default as Bar} from 'src/module/bar'
+      "/root/src/AppContext/api.ts",
+      "export { default as httpcontext } from 'src/api/httpcontext'
 ",
     ],
     Array [
-      "/root/src/types/StoresExternal.d.ts",
-      "export type {default as Baz} from 'src/module/baz'
+      "/root/src/AppContext/api.ts",
+      "export * from 'src/api'
 ",
     ],
     Array [
-      "/root/src/types/StoresExternal.d.ts",
-      "// this file is auto generate 
-export as namespace StoresExternal;
+      "/root/src/AppContext/api.ts",
+      "export { default as httpcontext } from 'src/api/httpcontext'
 ",
     ],
   ],

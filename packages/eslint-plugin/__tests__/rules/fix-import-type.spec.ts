@@ -24,31 +24,36 @@ describe('fix-import-type', () => {
   });
   test('fix-import-type should work', async () => {
     const code = [
-      `import type {Foo} from 'src/module/foo';`,
-      `import type Bar from 'src/module/bar';`,
-      `import type {default as Baz} from 'src/module/baz';`,
+      `import type {Foo} from 'src/modules/foo';`,
+      `import type Bar from 'src/modules/bar';`,
+      `import type {default as Baz} from 'src/modules/baz';`,
       `let foo: Foo = null;`,
       `let bar: Bar = null;`,
       `let baz: Baz = null;`,
     ].join('');
 
     const codeFixed = [
-      `let foo: StoresExternal.Foo = null;`,
-      `let bar: StoresExternal.Bar = null;`,
-      `let baz: StoresExternal.Baz = null;`,
+      `let foo: ComponentsExternal.Foo = null;`,
+      `let bar: ComponentsExternal.Bar = null;`,
+      `let baz: ComponentsExternal.Baz = null;`,
     ].join('');
 
     const linter = createESlint({
-      '@chanjet/fix-import-type': 'error',
+      '@chanjet/fix-import-type': [
+        'error',
+        {
+          target: /\/src\/components/,
+          from: /\/src\/(modules|hkj)\//,
+        },
+      ],
     });
 
-    const filePath = '/root/src/stores/appStore.ts';
+    const filePath = '/root/src/components/foo.ts';
     let result = await linter.lintText(code, { filePath });
 
     expect(result[0].output).not.toBeUndefined();
     expect(onlytext(result[0].output as string)).toBe(onlytext(codeFixed));
     await delay(60);
     expect(fsMock.appendFile).toBeCalled();
-    expect(fsMock.appendFile).toMatchSnapshot();
   });
 });
