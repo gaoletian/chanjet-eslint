@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/types';
-import { isRequireContextExpression, isRequireExpression } from '../astUtil';
+import { isImportType, isRequireContextExpression, isRequireExpression } from '../astUtil';
 import { getModuleFullPath } from '@chanjet/eslint-utils';
 
 export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
@@ -27,6 +27,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
       /* ---------------------------- 静态导入 Import From ---------------------------- */
 
       ImportDeclaration(node) {
+        if (isImportType(node)) return;
         check(node);
       },
 
