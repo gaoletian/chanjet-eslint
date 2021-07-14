@@ -22,7 +22,7 @@ const commandResolve = (cmd: string) => require.resolve('./commands/' + cmd);
 
 const Commands = {
   eslint: {
-    title: 'eslint fix-import-type',
+    title: 'eslint',
     path: commandResolve('eslint'),
   },
   src: {

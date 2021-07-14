@@ -34,8 +34,6 @@ export async function transform(filePath: string, option: Record<string, string>
       'unused-imports/no-unused-imports-ts': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@chanjet/fix-import-type': 'off',
-      '@chanjet/prefer-alias-path': ['error', {}],
-      '@chanjet/prefer-appcontext': ['error', {}],
     };
     // 自定义rule规则
     const rules = option.rules ? require(option.rules) : defaultRules;
