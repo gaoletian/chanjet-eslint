@@ -6,8 +6,8 @@ exports[`cmod command test cmod --dry 2`] = `"{\\"filePaths\\":[],\\"currentCmd\
 
 exports[`cmod command test cmod --dry 3`] = `"{\\"filePaths\\":[],\\"currentCmd\\":{\\"title\\":\\"修复模块导入路径\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/src-alias.js\\"}}"`;
 
-exports[`cmod command test cmod --dry 4`] = `"{\\"filePaths\\":[\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/jsfile.js\\",\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/jsxfile.jsx\\",\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/tsfile.ts\\",\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/tsxfile.tsx\\"],\\"currentCmd\\":{\\"title\\":\\"eslint fix-import-type\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/eslint.js\\"}}"`;
+exports[`cmod command test cmod --dry 4`] = `"{\\"filePaths\\":[\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/jsfile.js\\",\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/jsxfile.jsx\\",\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/tsfile.ts\\",\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/__tests__/fixture/tsxfile.tsx\\"],\\"currentCmd\\":{\\"title\\":\\"eslint\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/eslint.js\\"}}"`;
 
-exports[`cmod command test cmod --dry 5`] = `"{\\"filePaths\\":[],\\"currentCmd\\":{\\"title\\":\\"eslint fix-import-type\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/eslint.js\\"}}"`;
+exports[`cmod command test cmod --dry 5`] = `"{\\"filePaths\\":[],\\"currentCmd\\":{\\"title\\":\\"eslint\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/eslint.js\\"}}"`;
 
-exports[`cmod command test cmod --dry 6`] = `"{\\"filePaths\\":[],\\"currentCmd\\":{\\"title\\":\\"eslint fix-import-type\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/eslint.js\\"}}"`;
+exports[`cmod command test cmod --dry 6`] = `"{\\"filePaths\\":[],\\"currentCmd\\":{\\"title\\":\\"eslint\\",\\"path\\":\\"/Users/gaoletian/chanjet/chanjet-eslint/packages/codemod/dist/commands/eslint.js\\"}}"`;

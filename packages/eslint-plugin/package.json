@@ -1,6 +1,6 @@
 {
   "name": "@chanjet/eslint-plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "check invalid this in arrow function",
   "keywords": [
     "eslint",
@@ -18,7 +18,7 @@
     "test": "yarn run build"
   },
   "dependencies": {
-    "@chanjet/eslint-utils": "1.2.0",
+    "@chanjet/eslint-utils": "1.3.0",
     "@typescript-eslint/experimental-utils": "^4.23.0",
     "@typescript-eslint/types": "^4.23.0",
     "chalk": "^4.1.1",

@@ -1,3 +1,18 @@
+v1.3.0 / 2021-07-14
+===================
+
+### 🐛 Bug Fixes
+
+- `codemod`
+  - Disable prefer-alias-path and prefer-appcontext fix-import-type default config
+- `eslint-plugin`
+  - Ban-import-from-modules 排除 import type
+
+
+### 💖 Thanks to
+
+- gaoletian
+
 v1.2.0 / 2021-06-17
 ===================
 
