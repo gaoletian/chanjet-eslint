@@ -6,8 +6,12 @@
     "declarationMap": false,
     "outDir": "./dist",
     "rootDir": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
-  "include": ["src", "typings"],
+  "include": [
+    "src",
+    "typings"
+  ],
   "references": []
 }

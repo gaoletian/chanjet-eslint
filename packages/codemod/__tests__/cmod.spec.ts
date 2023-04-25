@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 
 const execCmd = (cmdMock: string) => {
-  let cmd = cmdMock.replace('cmod', `node ${path.join(__dirname, '../dist/cmod.js')}`);
+  const cmd = cmdMock.replace('cmod', `node ${path.join(__dirname, '../dist/cmod.js')}`);
   return execSync(cmd, { encoding: 'utf8' });
 };
 

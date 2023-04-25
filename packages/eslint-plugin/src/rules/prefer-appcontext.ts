@@ -134,6 +134,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
         // 重命名引用符号  userStore ==> AppContext.stores.userStore
         varNode.references.forEach((ref) => {
           const newName = ['AppContext', namespace, newSymbolName].join('.');
+          // @ts-ignore
           renameReferance(context, ref.identifier, newName);
         });
 

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 module.exports = {
+  testEnvironment: "jsdom",
   preset: 'ts-jest',
   setupFilesAfterEnv: ['./scripts/setupJestEnv.ts'],
   coverageDirectory: 'coverage',

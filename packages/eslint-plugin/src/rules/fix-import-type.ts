@@ -25,7 +25,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
     // 初始化工作目录
     const currentFile = context.getFilename();
     WorkDir = currentFile.split('/src/')[0];
-    const namespace = getNameSpace(currentFile) + 'External';
+    const namespace = `${getNameSpace(currentFile)}External`;
     const options = context.options[0];
     const sourceCode = context.getSourceCode();
 
@@ -47,20 +47,20 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
 
       /* ---------------------------------- 抽取类型 ---------------------------------- */
       // prettier-ignore
-      const specifiers = ( node.specifiers as TSESTree.ImportSpecifier[] )
-                      .map((spec) => {
-                          // import type IFoo from '...'
-                          if (!spec.imported)
-                              return 'default as ' + spec.local.name;
-                          // import type {IFoo} from '...'
-                          if (spec.local.name === spec.imported.name)
-                              return spec.imported.name;
-                          // import type {foo as IFoo, default as IFooDefault} from '...'
-                          return (
-                              spec.imported.name + ' as ' + spec.local.name
-                          );
-                      })
-                      .join(',');
+      const specifiers = (node.specifiers as TSESTree.ImportSpecifier[])
+        .map((spec) => {
+          // import type IFoo from '...'
+          if (!spec.imported)
+            return `default as ${spec.local.name}`;
+          // import type {IFoo} from '...'
+          if (spec.local.name === spec.imported.name)
+            return spec.imported.name;
+          // import type {foo as IFoo, default as IFooDefault} from '...'
+          return (
+            `${spec.imported.name} as ${spec.local.name}`
+          );
+        })
+        .join(',');
 
       addExportCode(`export type {${specifiers}} from ${node.source.raw}`, namespace);
 
@@ -70,6 +70,7 @@ export default <Chanjet.ChanjetRuleModule<{ target: RegExp; from: RegExp }>>{
       Variables.forEach((varNode) => {
         varNode.references.forEach((ref) => {
           const newSymbolName = [namespace, ref.identifier.name].join('.');
+          // @ts-ignore
           astUtil.renameReferance(context, ref.identifier, newSymbolName);
         });
       });

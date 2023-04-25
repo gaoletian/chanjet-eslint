@@ -2,42 +2,42 @@
 
 exports[`prefer-appcontext prefer-appcontext should work 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
+  "calls": [
+    [
       "/root/src/AppContext/api.ts",
       "export * from 'src/api'
 ",
     ],
-    Array [
+    [
       "/root/src/AppContext/api.ts",
       "export { default as httpcontext } from 'src/api/httpcontext'
 ",
     ],
-    Array [
+    [
       "/root/src/AppContext/api.ts",
       "export * from 'src/api'
 ",
     ],
-    Array [
+    [
       "/root/src/AppContext/api.ts",
       "export { default as httpcontext } from 'src/api/httpcontext'
 ",
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
-    Object {
+    {
       "type": "return",
       "value": undefined,
     },
-    Object {
+    {
       "type": "return",
       "value": undefined,
     },
-    Object {
+    {
       "type": "return",
       "value": undefined,
     },

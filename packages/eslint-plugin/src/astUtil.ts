@@ -1,6 +1,5 @@
-import type { TSESTree } from '@typescript-eslint/experimental-utils';
-import type { RuleContext } from '@typescript-eslint/experimental-utils/dist/ts-eslint';
-
+import type { TSESTree } from '@typescript-eslint/types';
+import type { RuleContext } from '@typescript-eslint/utils/dist/ts-eslint/Rule';
 /**
  * 从当前节点依次向上获取 node.type
  * @param node
@@ -99,7 +98,7 @@ export const isRequireContextExpression = (node: TSESTree.CallExpression) => {
  * require('src/static/logo.png')
  */
 export const isRequireExpression = (node: TSESTree.CallExpression) => {
-  return node && node.callee && node.callee.type === 'Identifier' && node.callee.name === 'require';
+  return node?.callee?.type === 'Identifier' && node.callee.name === 'require';
 };
 /**
  * 是否静态require表达式
@@ -108,13 +107,11 @@ export const isRequireExpression = (node: TSESTree.CallExpression) => {
  */
 export const isStaticRequire = (node: TSESTree.CallExpression) => {
   return (
-    node &&
-    node.callee &&
-    node.callee.type === 'Identifier' &&
-    node.callee.name === 'require' &&
+    node?.callee?.type === 'Identifier' &&
+    node?.callee?.name === 'require' &&
     node.arguments.length === 1 &&
-    node.arguments[0].type === 'Literal' &&
-    typeof node.arguments[0].value === 'string'
+    ((node.arguments[0].type === 'Literal' && typeof node.arguments[0].value === 'string') ||
+      (node.arguments[0].type === 'TemplateLiteral' && node.arguments[0].quasis.length === 1))
   );
 };
 

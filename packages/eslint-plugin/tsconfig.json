@@ -4,6 +4,12 @@
     "composite": false,
     "rootDir": "."
   },
-  "include": ["src", "typings", "tests", "tools", "index.d.ts"],
+  "include": [
+    "src",
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "dist"
+  ],
   "references": []
 }

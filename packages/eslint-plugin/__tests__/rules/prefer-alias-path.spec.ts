@@ -5,7 +5,8 @@ describe('prefer-alias-path rule test', () => {
     '@chanjet/prefer-alias-path': 'error',
   });
   test('prefer-alias-path should work', async () => {
-    let raw, rawFixed;
+    let raw: string
+    let rawFixed: string;
 
     raw = [
       `import api from '../../api'`,
@@ -31,8 +32,8 @@ describe('prefer-alias-path rule test', () => {
 
     // prettier-ignore
     raw = [
-      `import userStore from '../stores'`, 
-      `import bar from './bar'`, 
+      `import userStore from '../stores'`,
+      `import bar from './bar'`,
       `import utils from '../../utils'`
     ].join('\n');
     rawFixed = [
@@ -114,7 +115,7 @@ describe('prefer-alias-path rule test', () => {
   test('should not fixed', async () => {
     // no need fix
     // prettier-ignore
-    const  raw = [
+    const raw = [
       'import "index.scss"',
       'import "./index.scss"',
       'import "../index.scss"',
@@ -123,6 +124,8 @@ describe('prefer-alias-path rule test', () => {
       'require("./index.scss")',
       'require("../index.scss")',
       'require("../../index.scss")',
+      'require("../../index.less")',
+      'require("../../index.macro")',
     ].join('\n')
     const rawFixed = [
       'import "index.scss"',
@@ -133,6 +136,8 @@ describe('prefer-alias-path rule test', () => {
       'require("src/modules/foo/index.scss")',
       'require("src/modules/index.scss")',
       'require("src/index.scss")',
+      'require("src/index.less")',
+      'require("src/index.macro")',
     ].join('\n');
 
     const result = await linter.lintText(raw, { filePath: '/root/src/modules/foo/foo.ts' });
