@@ -58,9 +58,9 @@ describe('i18n-extract-chinese =====> 测试用例', () => {
 
     const expectedCode = `
         <div>
-          {i18n.cjtT('欢迎使用应用程序')}&gt;&nbsp;
+          {i18n.cjtT('欢迎使用应用程序')}
           <p>{i18n.cjtT('这是一段中文文本')}</p>&nbsp;
-          <span>{i18n.cjtT('更多中文内容')}&nbsp;</span>
+          <span>{i18n.cjtT('更多中文内容')}</span>
         </div>
       `;
 
@@ -149,8 +149,9 @@ describe('i18n-extract-chinese =====> 测试用例', () => {
     const codeWithChinese = `
           <div>
             {true && '你好'}
-            <p>这是一段中文文本</p>
-            <p>{name || '这是一段中文文本'}</p>
+            <p>这是一段"符号干扰"中文文本</p>
+            这是中文文本，加个应为“符号干扰”一下
+            <p>{name ||  '这是一段,中文文本'}</p>
             <div>{true && bbb}</div>
             <span>更多中文内容</span>
           </div>
@@ -159,8 +160,9 @@ describe('i18n-extract-chinese =====> 测试用例', () => {
     const expectedCode = `
           <div>
             {true && i18n.cjtT('你好')}
-            <p>{i18n.cjtT('这是一段中文文本')}</p>
-            <p>{name || i18n.cjtT('这是一段中文文本')}</p>
+            <p>{i18n.cjtT('这是一段"符号干扰"中文文本')}</p>
+            {i18n.cjtT('这是中文文本，加个应为“符号干扰”一下')}
+            <p>{name ||  i18n.cjtT('这是一段,中文文本')}</p>
             <div>{true && bbb}</div>
             <span>{i18n.cjtT('更多中文内容')}</span>
           </div>
@@ -232,6 +234,34 @@ describe('i18n-extract-chinese =====> 测试用例', () => {
     const expectedCode = `
           <div>
             {i18n.cjtT('欢迎使用应用程序！')}
+            <p>{i18n.cjtT('这是一段中文文本。')}</p>
+            <span>{i18n.cjtT('更多中文内容。')}</span>
+          </div>
+        `;
+
+    const linter = createESlint({
+      '@chanjet/i18n-extract-chinese': 'error',
+    });
+
+    const result = await linter.lintText(codeWithChinese, { filePath: '/root/src/example.js' });
+    console.log(result[0].output);
+    expect(result[0].output).toEqual(expectedCode);
+  });
+
+  it('[apidoc-11] 测试翻译重构html类型 函数声明变量不替换', async () => {
+    const codeWithChinese = `
+          <div>
+            欢迎使用应用程序！
+            <div>{renderGrid()}</div>
+            <p>这是一段中文文本。</p>
+            <span>更多中文内容。</span>
+          </div>
+        `;
+
+    const expectedCode = `
+          <div>
+            {i18n.cjtT('欢迎使用应用程序！')}
+            <div>{renderGrid()}</div>
             <p>{i18n.cjtT('这是一段中文文本。')}</p>
             <span>{i18n.cjtT('更多中文内容。')}</span>
           </div>
