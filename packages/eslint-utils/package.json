@@ -10,6 +10,12 @@
   "author": "gaoletian",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "maintainers": [
+    {
+      "name": "chanjetsdp",
+      "email": "chanjetsdp@chanjet.com"
+    }
+  ],
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "watch": "yarn run clean && yarn run compile --watch",

@@ -6,6 +6,12 @@
   "bin": {
     "cmod": "dist/cmod.js"
   },
+  "maintainers": [
+    {
+      "name": "chanjetsdp",
+      "email": "chanjetsdp@chanjet.com"
+    }
+  ],
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "watch": "yarn run clean && yarn run compile --watch",

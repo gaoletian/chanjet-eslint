@@ -7,6 +7,12 @@
     "eslintplugin",
     "eslint-format"
   ],
+  "maintainers": [
+    {
+      "name": "chanjetsdp",
+      "email": "chanjetsdp@chanjet.com"
+    }
+  ],
   "author": "gaoletian",
   "main": "stylish.js",
   "dependencies": {

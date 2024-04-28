@@ -8,6 +8,12 @@
     "eslint-plugin"
   ],
   "author": "gaoletian",
+  "maintainers": [
+    {
+      "name": "chanjetsdp",
+      "email": "chanjetsdp@chanjet.com"
+    }
+  ],
   "main": "dist/index.js",
   "scripts": {
     "build": "yarn run clean && yarn run compile",
