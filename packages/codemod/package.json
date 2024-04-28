@@ -1,6 +1,6 @@
 {
   "name": "@chanjet/codemod",
-  "version": "2.1.0-alpha.0",
+  "version": "2.1.1-alpha.0",
   "main": "dist/cmod.js",
   "license": "MIT",
   "bin": {
@@ -21,8 +21,8 @@
     "test": "yarn run build"
   },
   "dependencies": {
-    "@chanjet/eslint-utils": "2.1.0-alpha.0",
-    "@chanjet/eslint-plugin": "2.1.0-alpha.0",
+    "@chanjet/eslint-utils": "2.1.1-alpha.0",
+    "@chanjet/eslint-plugin": "2.1.1-alpha.0",
     "chalk": "^4.1.1",
     "cli-progress": "^3.9.0",
     "console-table-printer": "^2.9.0",
