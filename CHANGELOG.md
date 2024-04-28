@@ -1,3 +1,19 @@
+v2.1.0-alpha.1 / 2024-04-28
+===================
+
+### 🐛 Bug Fixes
+
+- `CPYF-911`
+  - Package maintainer
+- `eslint-plugin`
+  - Plugin包bug修复CPYF-8456 CC国际化
+
+
+### 💖 Thanks to
+
+- gaoletian
+- shangxiangg
+
 v2.1.0-alpha.0 / 2024-04-28
 ===================
 
